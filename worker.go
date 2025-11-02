@@ -9,28 +9,23 @@ import (
 )
 
 // Worker periodically runs given task.
-//
-// task - a function which worker runs over time.
-//
-// delay - time between finishing N-th task and running N+1-th task.
-//
-// onErrDelay - time between finishing N-th task and running N+1-th task if N-th task returned error.
-//
-// tp - provides current time for worker.
-//
-// ti - time interval in which worker can run its task. If nil - task can be run whenever worker is ready.
-//
-// runTimeout - timeout for worker's task.
 type Worker struct {
+	// function which worker runs over time.
 	task Task
 
-	delay      time.Duration
+	// time between finishing N-th task and running N+1-th task.
+	delay time.Duration
+	// time between finishing N-th task and running N+1-th task if N-th task returned error.
 	onErrDelay time.Duration
 
+	// timeout for worker's task.
 	runTimeout time.Duration
 
+	// provides current time for worker.
 	tp TimeProvider
 
+	// time interval in which worker can run its task.
+	// If equals nil - task can be run whenever worker is ready.
 	ti *TimeInterval
 }
 
